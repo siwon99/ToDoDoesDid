@@ -14,7 +14,7 @@ function Register() {
   const handleApi = () => {
     console.log(email, password);
     axios
-      .post("https://reqres.in/api/register", {
+      .post("https://api.qushe8r.shop/users", {
         email: email,
         password: password,
       })
