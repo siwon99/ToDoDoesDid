@@ -1,0 +1,117 @@
+a {
+  color: rgb(46, 46, 46);
+  text-decoration: none;
+}
+
+/* Navbar */
+.nav {
+  outline: 1px solid black;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.hamburger {
+  font-size: 140%;
+  position: absolute;
+  top: 20%;
+  left: 20px;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  font-size: 140%;
+  position: absolute;
+  top: 20%;
+  left: 20px;
+  color: #787878;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar-navigation {
+  position: sticky;
+  top: 200px;
+  width: 10.5rem;
+  height: 100%;
+  position: fixed;
+  left: 19rem;
+  top: 12rem;
+  transform: translate(1em, 12rem)
+}
+
+.addBtn {
+  color: black;
+  background-color: rgb(247, 247, 247);
+  position: absolute;
+  border: 1px solid black;
+  width: 220px;
+  padding: 1% 0%;
+  margin: 20px 10px 10px;
+  cursor: pointer;
+  z-index: 99;
+}
+
+.addBtn:hover {
+  color: black;
+  background-color: lightgrey;
+  border: 1px solid black;
+  width: 220px;
+  padding: 1% 0%;
+  margin: 20px 10px 0px;
+  cursor: pointer;
+}
+
+/* Modal */
+.isOpen {
+  display: block;
+}
+
+/* Dropdown */
+@keyframes slide-fade-in-dropdown-animation {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.slide-fade-in-dropdown {
+  overflow: hidden;
+}
+
+.slide-fade-in-dropdown > ul {
+  animation: slide-fade-in-dropdown-animation .4s ease;
+}
+
+@keyframes slide-fade-out-dropdown-animation {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.slide-fade-out-dropdown {
+  overflow: hidden;
+}
+
+.slide-fade-out-dropdown > ul {
+  animation: slide-fade-out-dropdown-animation 0.4s ease;
+  animation-fill-mode: forwards;
+}
+
+.components-dropdown > ul {
+  position: relative;
+  top: 5px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  padding-left: 0;
+  list-style: none;
+}
