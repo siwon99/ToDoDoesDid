@@ -1,14 +1,21 @@
-import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Dropdown from "../components/Dropdown";
+import { useState } from "react";
+import Sidebar from "./Sidebar";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleBtn = () => {
+    setIsOpen(true);
+  };
+
   return (
-    <div>
-      <nav className="nav" onClick={()=> setIsSidebarOpen(true)}>
-        < GiHamburgerMenu className="hamburger"/>
+    <>
+      <sidebarBtn role="button" onClick={toggleBtn}>
+        <GiHamburgerMenu className="hamburger"/>
         <Dropdown />
-      </nav>
-    </div>
+      </sidebarBtn>
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+    </>
   );
 }

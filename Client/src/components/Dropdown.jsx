@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 const Dropdown = props => {
-  const [visibility, setVisibility] = React.useState(false);
-  const [repeat, setRepeat] = React.useState(null);
+  const [visibility, setVisibility] = useState(false);
+  const [repeat, setRepeat] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if(props.visibility) {
       clearTimeout(repeat);
       setRepeat(null);
