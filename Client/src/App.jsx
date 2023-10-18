@@ -1,7 +1,6 @@
 import "./App.css";
 import { Reset } from 'styled-reset';
 import Sidebar from '../src/components/Sidebar';
-
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,6 +8,7 @@ function App() {
     <>
       <Reset />
       <Sidebar />
+      
       {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />

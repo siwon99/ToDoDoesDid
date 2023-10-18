@@ -3,31 +3,81 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 /* Navbar */
 .nav {
   outline: 1px solid black;
-  height: 40px;
+  height: 50px;
   position: relative;
   display: flex;
   align-items: center;
-  z-index: 3;
+}
+
+#sideNav {
+  width: 300px;
+  position: relative;
+  height: calc(100vh - 50px);
+  border-right: 1px solid #6482B9;
+  padding-top: 10px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+#sideNav > .schedule {
+  position: relative;
+  width: 60vw;
+  max-width: 230px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+#sideNav > .schedule > li {
+  width: calc(100% - 60px);
+  padding: 10px 60px 0px 0px;
+}
+
+#sideNav > .schedule > li > span {
+  display: inline-block;
+  margin: 8px;
+  font-size: 17px;
 }
 
 .hamburger {
-  font-size: 140%;
-  position: absolute;
+  font-size: 170%;
+  position: relative;
   top: 20%;
-  left: 20px;
+  left: 30px;
   cursor: pointer;
 }
 
 .hamburger:hover {
-  font-size: 140%;
-  position: absolute;
-  top: 20%;
-  left: 20px;
   color: #787878;
+}
+
+.close {
+  font-size: 170%;
+  font-weight: bold;
+  position: relative;
+  top: 20%;
+  left: 30px;
   cursor: pointer;
+}
+
+.close:hover {
+  color: #787878;
 }
 
 /* Sidebar */
@@ -44,24 +94,40 @@ a {
 
 .addBtn {
   color: black;
-  background-color: rgb(247, 247, 247);
-  position: absolute;
-  border: 1px solid black;
-  width: 220px;
-  padding: 1% 0%;
+  background-color: #E0EBFF;
+  border-radius: 7px;
+  position: relative;
+  width: 230px;
+  padding: 15px;
+  text-align: center;
   margin: 20px 10px 10px;
   cursor: pointer;
-  z-index: 99;
 }
 
 .addBtn:hover {
-  color: black;
-  background-color: lightgrey;
-  border: 1px solid black;
-  width: 220px;
-  padding: 1% 0%;
-  margin: 20px 10px 0px;
-  cursor: pointer;
+  background-color: #B8D7FF;
+}
+
+.addBtn > li {
+  font-size:14px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.addBtn > li:hover {
+  color: red;
+  font-weight: bold;
+  background-color: #E0EBFF;
+  border-radius: 7px;
+}
+
+.hr {
+  border: 0;
+  width: 90%;
+  text-align: center;
+  height: 1px;
+  background-color: #86A5FF;
+  margin-top: 15px;
 }
 
 /* Modal */

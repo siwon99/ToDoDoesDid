@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 
-const Dropdown = props => {
-  const [visibility, setVisibility] = useState(false);
-  const [repeat, setRepeat] = useState(null);
-
-  useEffect(() => {
-    if(props.visibility) {
-      clearTimeout(repeat);
-      setRepeat(null);
-      setVisibility(true);
-    } else {
-      setRepeat(setTimeout(() => {
-        setVisibility(false);
-      }, 400));
-    }
-  }, [props.visibility]);
-
+export default function Dropdown() {
   return (
-    <article className={`components-dropdown ${props.visibility ? 'slide-fade-in-dropdown' : 'slide-fade-out-dropdown'}`}> 
-      {visibility && props.children} 
-    </article>
+    <>
+      <hr className="hr" />
+      <li>마이페이지</li>
+      <li>로그아웃</li>
+    </>
   )
-};
-
-export default Dropdown;
-
+}
