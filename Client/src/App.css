@@ -18,6 +18,10 @@ li {
   padding-left: 1%;
 }
 
+.nav.sidebarVisible {
+  margin-left: 315px;
+}
+
 .search {
   position: relative;
   place-items: center;
@@ -31,10 +35,9 @@ li {
 
 #sideNav {
   width: 300px;
-  height: 100vh;
+  height: calc(100vh - 70px);
   left: 0px;
   position: absolute;
-  height: calc(100vh - 40px);
   margin-top: 23px;
   padding-left: 15px;
   background-color: #f6faff;
@@ -75,7 +78,7 @@ li {
   font-size: 180%;
   position: relative;
   top: 12px;
-  left: 30px;
+  left: 20px;
   cursor: pointer;
 }
 
@@ -88,7 +91,7 @@ li {
   font-weight: bold;
   position: relative;
   top: 12px;
-  left: 30px;
+  left: 20px;
   cursor: pointer;
 }
 
@@ -175,6 +178,71 @@ li {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+
+/* TaskCalendar */
+.userCalendar {
+  font-size: 30px;
+  display: inline-block;
+  position: absolute;
+  top: 70px;
+  left: 130px;
+}
+
+.taskCalendar {
+  width: 100%;
+  height: 130px;
+  border-bottom: 1px solid black;
+  position: relative;
+}
+
+.mainCalendar {
+  background-color: yellow;
+  width: 100%;
+  height: calc(100vh - 200px);
+}
+
+.taskCalendar.sidebarVisible {
+  width: calc(100% - 315px); 
+  margin-left: 315px;
+}
+
+.mainCalendar.sidebarVisible {
+  width: calc(100% - 315px); 
+  margin-left: 315px;
+}
+
+.TeamBtn {
+  position: absolute; 
+  border: none;
+  border-radius: 7px;
+  width: 130px;
+  height: 40px;
+  background-color: #E0EBFF;
+  top: 10px;
+  right: 10px; 
+  cursor: pointer;
+}
+
+.TeamBtn:hover {
+  background-color: #B8D7FF;
+}
+
+.TodayBtn {
+  position: relative; 
+  border: none;
+  border-radius: 7px;
+  width: 80px;
+  height: 30px;
+  background-color: #E0EBFF;
+  top: 10px;
+  left: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.TodayBtn:hover {
+  background-color: #B8D7FF;
 }
 
 /* Dropdown */

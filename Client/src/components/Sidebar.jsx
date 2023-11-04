@@ -2,11 +2,16 @@ import React, { useCallback, useState } from "react";
 import AddBtn from './AddBtn';
 import SmallCalendar from './SmallCalendar';
 import SearchBar from './SearchBar';
+import TaskCalendar from './TaskCalendar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 
 export default function Sidebar() {
   const [toggle, setToggle] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarVisibility(!isSidebarVisible);
+  };
 
   const onIconClick = useCallback(() => {
     setToggle((e) => !e);
@@ -35,6 +40,7 @@ export default function Sidebar() {
 
       <SearchBar />
       </div>
+      <TaskCalendar isSidebarVisible={toggle} />
     </>
   );
 }
