@@ -1,35 +1,25 @@
 import React, {useState} from "react"
-
-function Modal() {
-  return (
-    <div className="Modalcontainer">모달rrrrrrrrrr 내용</div>
-  )
-}
+import Modal from "./Modal.jsx"
 
 export default function Dropdown() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
-    setIsModalVisible(true);
-    console.log("List item clicked!")
-  };
-
-  const closeModal = () => {
-    setIsModalVisible(false);
+    setModalOpen(true);
   };
 
   return (
     <>
       <hr className="hr" />
-      <li onClick={showModal}>마이페이지</li>
+      <button onClick={showModal}>
+        마이페이지
+        {modalOpen && (
+          <Modal closeModal={closeModal} />
+        )}
+      </button>
       <li onClick={showModal}>로그아웃</li>
 
-      {isModalVisible && (
-        <>
-          <Modal />
-          <button className="ModalClose" onClick={closeModal}>X</button>
-        </>
-      )}
+
     </>
   )
 }

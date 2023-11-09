@@ -20,13 +20,12 @@ export default function Sidebar() {
   return (
     <>
       <div className="nav">
-        <div id="toggleBtn" onClick={onIconClick}>
-          {toggle ? <GrClose className="close" /> : <GiHamburgerMenu className="hamburger" />}
+        <div>
+          {toggle ? <GrClose className="close" onClick={onIconClick}/> : <GiHamburgerMenu className="hamburger" onClick={onIconClick}/>}
         </div>
 
         <nav id="sideNav" className={toggle ? "show" : "hide"}>
-          <AddBtn>
-          </AddBtn>
+          <AddBtn />
           <SmallCalendar />
           <ul className="schedule">
             <li>
