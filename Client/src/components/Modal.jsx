@@ -1,15 +1,22 @@
-import React from "react"
+import React from "react";
 
-export default function Modal() {
+const Modal = ({ open, close, header, children }) => {
+  return (
+    <div className={open ? "openModal modal" : "modal"}>
+      {open ? (
+        <section>
+          <header>
+            {header}
+            <div className="Modalheadertitle">일정 만들기</div>
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+          </header>
+          <main>{children}</main>
+        </section>
+      ) : null}
+    </div>
+  );
+};
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-    return (
-        <div className="container">
-            <button className="close" onClick={closeModal}>X</button>
-            <p>모달창입니다.</p>
-        </div>
-    );
-}
+export default Modal;

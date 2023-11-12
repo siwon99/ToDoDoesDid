@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputTaskInfo from './InputTaskInfo'
 import '../App.css'
 import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths } from 'date-fns';
@@ -109,7 +110,7 @@ export default function TaskCalendar({ isSidebarVisible }) {
     <>
       <div className={`taskCalendar ${isSidebarVisible ? 'sidebarVisible' : ''}`}>
         <div className="userCalendar">user's Calendar</div>
-        <button className="TeamBtn" onClick={TeamBtn}>팀만들기</button>
+        <InputTaskInfo />
       </div>
 
       <div className={`mainCalendar ${isSidebarVisible ? 'sidebarVisible' : ''}`}>
@@ -118,7 +119,7 @@ export default function TaskCalendar({ isSidebarVisible }) {
         </div>
       </div>
 
-      <div className="BigCalendar">
+      <div className={`BigCalendar ${isSidebarVisible ? 'sidebarVisible' : ''}`}>
         <RenderHeader
           currentMonth={currentMonth}
           prevMonth={prevMonth}

@@ -9,7 +9,7 @@ li {
 
 /* Navbar */
 .nav {
-  outline: 1px solid black;
+  outline: 1px solid #cfe4fe;
   width: 100%;
   height: 50px;
   position: relative;
@@ -151,33 +151,159 @@ li {
 }
 
 /* Modal */
-.isOpen {
-  display: block;
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.ModalNav {
-  width: 300px;
-  height: 50px;
-  background-color: yellow;
+.modal button {
+  outline: none;
+  cursor: pointer;
+  border: 0;
 }
 
-.Modalcontainer {
-  width: 300px;
-  height: 200px;
-  z-index: 999;
-  position: fixed; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  background-color: red;
-  border: 1px solid black;
-  border-radius: 8px;
+.modal > section {
+  width: 90%;
+  max-width: 450px;
+  margin: 0 auto;
+  border-radius: 0.3rem;
+  background-color: #fff;
+  animation: modal-show 0.3s;
+  overflow: hidden;
 }
 
-.ModalClose {
+.modal > section > header {
+  position: relative;
+  height: 40px;
+  background-color: #f1f1f1;
+  font-weight: 700;
+}
+
+.modal > section > header button {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  top: 0;
+  left: 410px;
+  right: 0;
+  width: 30px;
+  font-size: 35px;
+  font-weight: 500;
+  color: #999;
+  background-color: transparent;
+}
+
+.modal > section > header button:hover {
+  color: red;
+}
+
+.modal > section > main {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
+}
+
+.ModalInfo {
+  width: 300px;
+  height: 280px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ModalTaskName {
+  width: 280px;
+  height: 33px;
+  position: absolute;
+  font-size: 20px;
+  top: 23px;
+  right: 60px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.ModalTaskBtn {
+  color: black;
+  background-color: #c7d9fa;
+  position: absolute;
+  top: 230px;
+  left: 260px;
+  border-radius: 7px;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ModalTaskBtn:hover  {
+  background-color: #95c3ff;
+}
+
+.ModalTaskcloseBtn {
+  color: black;
+  position: absolute;
+  top: 230px;
+  left: 150px;
+  border-radius: 7px;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ModalTaskcloseBtn:hover {
+  background-color: #ffb8b8;
+}
+
+.ModalCheck {
+  width: 80px;
+  position: absolute;
+  top: 30px;
+  left: 260px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #a2a3a4;
+  gap: 5px;
+}
+
+.ModalCheck input {
+  transform: scale(1.5);
+  margin-right: 5px; 
+}
+
+.Modalheadertitle {
+  position: absolute;
+  top: 30%;
+  left: 20px;
+  color: #999;
+}
+
+.modal.openModal {
+  display: flex;
+  align-items: center;
+  animation: modal-bg-show 0.3s;
+}
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
 }
 
 /* TaskCalendar */
@@ -211,7 +337,7 @@ li {
   margin-left: 315px;
 }
 
-.TeamBtn {
+.AddTaskBtn {
   position: absolute; 
   border: none;
   border-radius: 7px;
@@ -223,7 +349,7 @@ li {
   cursor: pointer;
 }
 
-.TeamBtn:hover {
+.AddTaskBtn:hover {
   background-color: #B8D7FF;
 }
 
@@ -255,6 +381,11 @@ li {
   width: 100%;
   height: 100%;
 
+  &.sidebarVisible {
+    width: calc(100% - 315px);
+    margin-left: 315px;
+  }
+  
   .header {
     width: 100%;
     height: 50px;
@@ -359,7 +490,7 @@ li {
         height: 93%;
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: flex-start; 
         align-items:flex-start;
         border-right: 1px dotted black;
         font-size: 0.8em;
