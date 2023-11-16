@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import Modal from "./Modal";
+import Modal from "../Modal";
+import DatePicker from './DatePicker';
+import DateColor from './DateColor';
+import { IoMdColorWand } from "react-icons/io";
 
 function Checkbox({ children, disabled, checked, onChange }) {
   const [importCheck, setImportCheck] = useState(false);
@@ -19,7 +22,7 @@ function Checkbox({ children, disabled, checked, onChange }) {
   );
 }
 
-export default function YourComponent() {
+export default function TaskModal() {
   const [modalOpen, setModalOpen] = useState(false);
   const [scheduleInfo, setScheduleInfo] = useState({
     taskName: "",
@@ -30,7 +33,7 @@ export default function YourComponent() {
     alaram: true,
     important: true,
     description: "",
-    color: "#a8a8a8"
+    color: ""
   });
 
   const openModal = () => {
@@ -39,6 +42,23 @@ export default function YourComponent() {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  //날짜변경
+  const handleDateChange = ({ startDate, endDate }) => {
+    setScheduleInfo((prevInfo) => ({
+      ...prevInfo,
+      startTime: startDate,
+      endTime: endDate,
+    }));
+  };
+
+  //색상변경
+  const handleUpdateColor = (newColor) => {
+    setColorInfo((prevData) => ({
+      ...prevData,
+      color: newColor,
+    }));
   };
 
   //입력변경
@@ -79,6 +99,9 @@ export default function YourComponent() {
             <button className="ModalTaskcloseBtn" onClick={closeModal}>취소하기</button>
             <button className="ModalTaskBtn" onClick={handleScheduleRegistration}>일정 등록</button>
           </div>
+          <DatePicker onDateChange={handleDateChange} />
+          <IoMdColorWand className="DateColor" />
+          <DateColor onUpdateColor={handleUpdateColor} />
         </div>
       </Modal>
     </React.Fragment>

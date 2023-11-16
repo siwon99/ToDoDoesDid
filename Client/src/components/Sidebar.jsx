@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import AddBtn from './AddBtn';
 import SmallCalendar from './SmallCalendar';
 import SearchBar from './SearchBar';
-import TaskCalendar from './TaskCalendar';
+import TaskCalendar from './TaskCalendar/TaskCalendar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 

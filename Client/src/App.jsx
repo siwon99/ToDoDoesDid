@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Reset } from 'styled-reset';
 import Sidebar from './components/Sidebar';
-import InputTaskInfo from './components/InputTaskInfo'
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
