@@ -245,7 +245,24 @@ li {
   background-color: #95c3ff;
 }
 
-.ModalTaskcloseBtn {
+.ModalTaskRewriteBtn {
+  background-color: #fecdcd;
+  color: black;
+  position: absolute;
+  top: 350px;
+  right: 260px;
+  border-radius: 7px;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ModalTaskRewriteBtn:hover {
+  background-color: #e4effd;
+}
+
+.ModalTaskDeleteBtn {
   color: black;
   position: absolute;
   top: 350px;
@@ -257,8 +274,8 @@ li {
   cursor: pointer;
 }
 
-.ModalTaskcloseBtn:hover {
-  background-color: #ffb8b8;
+.ModalTaskDeleteBtn:hover {
+  background-color: #e4effd;
 }
 
 .ModalCheck {

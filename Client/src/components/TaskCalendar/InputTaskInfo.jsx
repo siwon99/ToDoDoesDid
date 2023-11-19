@@ -74,10 +74,34 @@ export default function TaskModal() {
   const handleScheduleRegistration = async () => {
     try {
       const response = await axios.post('https://api.qushe8r.shop/task', scheduleInfo);
-      console.log('서버 응답:', response.data);
+      console.log('일정등록 서버 응답:', response.data);
     } catch (error) {
-      console.error('에러 발생:', error);
+      console.error('일정등록 에러 발생:', error);
     }
+    closeModal();
+  };
+
+  //일정삭제
+  const handleTaskDeletion = async () => {
+    try {
+      const taskId = '1'; 
+      const response = await axios.delete(`https://api.qushe8r.shop/task/${taskId}`);
+      console.log('일정삭제 서버 응답:', response.data);
+    } catch (error) {
+      console.error('일정삭제 에러 발생:', error);
+    }
+    closeModal();
+  };
+
+  //일정수정
+  const handleTaskUpdate = async () => {
+    try {
+      const response = await axios.patch(`https://api.qushe8r.shop/task/${scheduleInfo.taskId}`, scheduleInfo);
+      console.log('일정수정 서버 응답:', response.data);
+    } catch (error) {
+      console.error('일정수정 에러 발생:', error);
+    }
+
     closeModal();
   };
 
@@ -96,7 +120,8 @@ export default function TaskModal() {
               placeholder="일정 추가"
             />
             <Checkbox />
-            <button className="ModalTaskcloseBtn" onClick={closeModal}>취소하기</button>
+            <button className="ModalTaskRewriteBtn" onClick={handleTaskUpdate}>수정하기</button>
+            <button className="ModalTaskDeleteBtn" onClick={handleTaskDeletion}>삭제하기</button>
             <button className="ModalTaskBtn" onClick={handleScheduleRegistration}>일정 등록</button>
           </div>
           <DatePicker onDateChange={handleDateChange} />
