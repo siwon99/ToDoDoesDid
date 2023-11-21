@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import { HuePicker } from 'react-color';
 
-const ColorButton = ({ onUpdateColor }) => {
+const DateColor = ({ onUpdateColor }) => {
   const [color, setColor] = useState('#000');
 
   const handleColorChange = (color) => {
     setColor(color);
     onUpdateColor(color);
-
-    document.body.style.backgroundColor = color.hex;
   };
 
   return (
@@ -20,4 +18,4 @@ const ColorButton = ({ onUpdateColor }) => {
   );
 };
 
-export default ColorButton;
+export default DateColor;

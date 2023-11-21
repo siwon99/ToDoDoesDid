@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Modal from "../Modal";
 import DatePicker from './DatePicker';
@@ -35,6 +35,7 @@ export default function TaskModal() {
     description: "",
     color: ""
   });
+  const [tasks, setTasks] = useState([]);
 
   const openModal = () => {
     setModalOpen(true);
@@ -57,7 +58,7 @@ export default function TaskModal() {
   const handleUpdateColor = (newColor) => {
     setColorInfo((prevData) => ({
       ...prevData,
-      color: newColor,
+      color: newColor.hex,
     }));
   };
 
@@ -80,6 +81,21 @@ export default function TaskModal() {
     }
     closeModal();
   };
+  
+  // 일정가져오기
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get('https://api.qushe8r.shop/tasks');
+      setTasks(response.data);
+    } catch (error) {
+      console.error('일정 목록 가져오기 에러:', error);
+    }
+  };
+
+   useEffect(() => {
+    fetchTasks();
+  }, []);
+
 
   //일정삭제
   const handleTaskDeletion = async () => {
@@ -129,6 +145,14 @@ export default function TaskModal() {
           <DateColor onUpdateColor={handleUpdateColor} />
         </div>
       </Modal>
+  
+      <div className="TaskList">
+        {tasks.map(task => (
+          <div key={task.id} style={{ backgroundColor: task.color }}>
+            {task.taskName}
+          </div>
+        ))}
+      </div>
     </React.Fragment>
   );
 }

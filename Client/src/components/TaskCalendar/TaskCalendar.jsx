@@ -6,6 +6,7 @@ import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
+
 //Header
 const RenderHeader = ({currentMonth, prevMonth, nextMonth}) => {
   return (
@@ -72,8 +73,8 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, today}) => {
             isToday ? 'today' : ''
           }`}
           style={{
-            backgroundColor: isDisabled ? '#FFF0F5' : '#CCE1FF', 
-            color: isDisabled ? '#FFBEC3' : '',
+            backgroundColor: isDisabled ? '#FFFF' : '#FFF', 
+            color: isDisabled ? '#c8c8c8' : '',
           }}
           key={day}
           onClick={() => onDateClick(cloneDay)}
@@ -83,6 +84,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, today}) => {
             ? 'text not-valid' : '' } id="selectedDay">
               {formattedDate}
           </span>
+
         </div>
       );
       day = addDays(day, 1);
@@ -100,6 +102,7 @@ export default function TaskCalendar({ isSidebarVisible }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(new Date());
+  const [events, setEvents] = useState([]);
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -111,6 +114,7 @@ export default function TaskCalendar({ isSidebarVisible }) {
 
   const onDateClick = (day) => {
     setSelectedDate(day);
+    openModal();
   };
 
   const TodayClick = () => {
@@ -120,10 +124,15 @@ export default function TaskCalendar({ isSidebarVisible }) {
     setSelectedDate(nowDate); 
   }
 
+  const handleScheduleRegistration = (newEvent) => {
+    setEvents([...events, newEvent]);
+    closeModal();
+  };
+
   return (
     <div className="TaskCalendarWrapper">
       <div className={`taskCalendar ${isSidebarVisible ? 'sidebarVisible' : ''}`}>
-        <div className="userCalendar">user's Calendar</div>
+        <div className="userCalendar">My Calendar</div>
         <InputTaskInfo />
       </div>
 
@@ -144,6 +153,8 @@ export default function TaskCalendar({ isSidebarVisible }) {
           currentMonth={currentMonth}
           selectedDate={selectedDate}
           onDateClick={onDateClick}
+          events={events}
+          onEventSubmit={handleScheduleRegistration}
         />
       </div>
     </div>
