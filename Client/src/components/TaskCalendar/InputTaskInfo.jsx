@@ -85,7 +85,7 @@ export default function TaskModal() {
   // 일정가져오기
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://api.qushe8r.shop/tasks');
+      const response = await axios.get('https://api.qushe8r.shop/task');
       setTasks(response.data);
     } catch (error) {
       console.error('일정 목록 가져오기 에러:', error);
