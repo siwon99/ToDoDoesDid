@@ -374,6 +374,30 @@ li {
 }
 
 /* TaskCalendar */
+.sunday {
+  color: red;
+}
+
+.saturday {
+  color: blue;
+}
+/* .registerTask {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+  z-index: 99;
+  background-color: red;
+  width: 12%;
+  border-radius: 20px;
+  position: relative;
+} */
+
+.registerTask {
+  width: 100px;
+  height: 50px;
+  background-color: red;
+}
+
 .TaskCalendarWrapper {
   margin-left: 5px;
   margin-right: 5px;
@@ -573,6 +597,7 @@ li {
         font-size: 0.8em;
         cursor: pointer;
         padding: 5px 6px 1px 6px;
+        position: relative;
       }
       
       .col.cell.selected {

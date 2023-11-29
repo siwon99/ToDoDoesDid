@@ -36,6 +36,7 @@ export default function TaskModal() {
     color: ""
   });
   const [tasks, setTasks] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const openModal = () => {
     setModalOpen(true);
@@ -76,6 +77,8 @@ export default function TaskModal() {
     try {
       const response = await axios.post('https://api.qushe8r.shop/task', scheduleInfo);
       console.log('일정등록 서버 응답:', response.data);
+      console.log('서버에서 받은 일정 데이터:', response.data);
+      setTasks([...tasks, response.data]);
     } catch (error) {
       console.error('일정등록 에러 발생:', error);
     }
@@ -87,21 +90,30 @@ export default function TaskModal() {
     try {
       const response = await axios.get('https://api.qushe8r.shop/task');
       setTasks(response.data);
+      console.log('일정 가져오기 성공', response.data);
     } catch (error) {
-      console.error('일정 목록 가져오기 에러:', error);
+      console.error('일정 가져오기 에러:', error);
     }
   };
 
-   useEffect(() => {
-    fetchTasks();
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('https://api.qushe8r.shop/task');
+        setTasks(response.data);
+        console.log('일정 가져오기 성공', response.data);
+      } catch (error) {
+        console.error('일정 가져오기 에러', error);
+      }
+    };
+    fetchTasks(); 
   }, []);
-
 
   //일정삭제
   const handleTaskDeletion = async () => {
     try {
-      const taskId = '1'; 
-      const response = await axios.delete(`https://api.qushe8r.shop/task/${taskId}`);
+      const taskIdToDelete = scheduleInfo.taskId;
+      const response = await axios.delete(`https://api.qushe8r.shop/task/${taskIdToDelete}`);
       console.log('일정삭제 서버 응답:', response.data);
     } catch (error) {
       console.error('일정삭제 에러 발생:', error);
@@ -117,8 +129,13 @@ export default function TaskModal() {
     } catch (error) {
       console.error('일정수정 에러 발생:', error);
     }
-
     closeModal();
+  };
+
+  //일정클릭
+  const handleTaskClick = (task) => {
+    setSelectedTask(task);
+    setModalOpen(true);
   };
 
   return (
@@ -131,7 +148,7 @@ export default function TaskModal() {
               className="ModalTaskName"
               type="text"
               name="taskName"
-              value={scheduleInfo.taskName}
+              value={selectedTask ? selectedTask.name : ""}
               onChange={handleInputChange}
               placeholder="일정 추가"
             />
@@ -148,11 +165,12 @@ export default function TaskModal() {
   
       <div className="TaskList">
         {tasks.map(task => (
-          <div key={task.id} style={{ backgroundColor: task.color }}>
-            {task.taskName}
+          <div className="registerTask" key={task.taskId} onClick={() => handleTaskClick(task)}>
+            <div>{task.name}</div>
           </div>
         ))}
       </div>
+
     </React.Fragment>
   );
 }
