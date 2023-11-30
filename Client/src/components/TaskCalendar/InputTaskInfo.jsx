@@ -4,23 +4,7 @@ import Modal from "../Modal";
 import DatePicker from './DatePicker';
 import DateColor from './DateColor';
 import { IoMdColorWand } from "react-icons/io";
-
-function Checkbox({ children, disabled, checked, onChange }) {
-  const [importCheck, setImportCheck] = useState(false);
-
-  return (
-    <label className="ModalCheck">
-      <input
-        type="checkbox"
-        disabled={disabled}
-        checked={checked}
-        onChange={({ target: { checked } }) => onChange(checked)}
-      />
-      중요
-      {children}
-    </label>
-  );
-}
+import ImportantBox from './ImportantBox';
 
 export default function TaskModal() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,12 +15,13 @@ export default function TaskModal() {
     endTime: "",
     location: "",
     alaram: true,
-    important: true,
+    important: false,
     description: "",
     color: ""
   });
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [isImportant, setIsImportant] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -44,6 +29,15 @@ export default function TaskModal() {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  //체크
+  const handleCheckboxChange = (isChecked) => {
+    setIsImportant(isChecked);
+    setScheduleInfo((prevInfo) => ({
+      ...prevInfo,
+      important: isChecked,
+    }));
   };
 
   //날짜변경
@@ -57,7 +51,7 @@ export default function TaskModal() {
 
   //색상변경
   const handleUpdateColor = (newColor) => {
-    setColorInfo((prevData) => ({
+    setScheduleInfo((prevData) => ({
       ...prevData,
       color: newColor.hex,
     }));
@@ -77,7 +71,6 @@ export default function TaskModal() {
     try {
       const response = await axios.post('https://api.qushe8r.shop/task', scheduleInfo);
       console.log('일정등록 서버 응답:', response.data);
-      console.log('서버에서 받은 일정 데이터:', response.data);
       setTasks([...tasks, response.data]);
     } catch (error) {
       console.error('일정등록 에러 발생:', error);
@@ -142,17 +135,19 @@ export default function TaskModal() {
     <React.Fragment>
       <button className="AddTaskBtn" onClick={openModal}>추가하기</button>
       <Modal open={modalOpen} close={closeModal}>
-        <div className="ModalInfo">
+        <div className="ModalInfo" key="modalContent">
           <div>
             <input
               className="ModalTaskName"
               type="text"
               name="taskName"
-              value={selectedTask ? selectedTask.name : ""}
+              value={scheduleInfo.taskName}
               onChange={handleInputChange}
               placeholder="일정 추가"
             />
-            <Checkbox />
+            <ImportantBox
+              checked={isImportant} onChange={handleCheckboxChange}>
+            </ImportantBox>
             <button className="ModalTaskRewriteBtn" onClick={handleTaskUpdate}>수정하기</button>
             <button className="ModalTaskDeleteBtn" onClick={handleTaskDeletion}>삭제하기</button>
             <button className="ModalTaskBtn" onClick={handleScheduleRegistration}>일정 등록</button>
@@ -162,14 +157,6 @@ export default function TaskModal() {
           <DateColor onUpdateColor={handleUpdateColor} />
         </div>
       </Modal>
-  
-      <div className="TaskList">
-        {tasks.map(task => (
-          <div className="registerTask" key={task.taskId} onClick={() => handleTaskClick(task)}>
-            <div>{task.name}</div>
-          </div>
-        ))}
-      </div>
 
     </React.Fragment>
   );

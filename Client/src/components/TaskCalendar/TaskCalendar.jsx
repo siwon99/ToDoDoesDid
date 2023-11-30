@@ -4,7 +4,6 @@ import '../../App.css'
 import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parse, getDay } from 'date-fns';
 
-
 //Header
 const RenderHeader = ({currentMonth, prevMonth, nextMonth}) => {
   return (
@@ -44,7 +43,7 @@ const RenderDays = () => {
 };
 
 //Body
-const RenderCells = ({ currentMonth, selectedDate, onDateClick, events, onEventSubmit, today }) => {
+const RenderCells = ({ currentMonth, selectedDate, onDateClick, events, tasks, today }) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
@@ -85,33 +84,19 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, events, onEventS
             key={day}
             onClick={() => onDateClick(cloneDay)}
           >
-          {dayEvents.length > 0 && (
-          <div className="event-container">
-            {dayEvents.map(event => (
-              <div
-                key={event.taskId}
-                className="event"
-              >
-                <div className="event-info">
-                  <div className="event-name">{event.taskName}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
           <span 
           className={format(currentMonth, 'M') !== format(day, 'M') ? 'text not-valid' : ''} id="selectedDay">
             {formattedDate}
           </span>
+          <div className="eventTasks">일정</div>
         </div>
+        
       );
       day = addDays(day, 1);
     }
 
     rows.push(<div className="row" key={day}>{weekDays}</div>);
   }
-
   return <div className="body">{rows}</div>;
 };
 
@@ -120,8 +105,8 @@ export default function TaskCalendar({ isSidebarVisible }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(new Date());
-  const [events, setEvents] = useState([]);
-
+  const [tasks, setTasks] = useState([]);
+  
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
   };
@@ -132,7 +117,6 @@ export default function TaskCalendar({ isSidebarVisible }) {
 
   const onDateClick = (day) => {
     setSelectedDate(day);
-    openModal();
   };
 
   const TodayClick = () => {
@@ -142,16 +126,10 @@ export default function TaskCalendar({ isSidebarVisible }) {
     setSelectedDate(nowDate); 
   }
 
-  const handleScheduleRegistration = (newEvent) => {
-    setEvents([...events, newEvent]);
-    closeModal();
-  };
-
   return (
     <div className="TaskCalendarWrapper">
       <div className={`taskCalendar ${isSidebarVisible ? 'sidebarVisible' : ''}`}>
         <div className="userCalendar">My Calendar</div>
-        <InputTaskInfo />
       </div>
 
       <div className={`mainCalendar ${isSidebarVisible ? 'sidebarVisible' : ''}`}>
@@ -167,12 +145,12 @@ export default function TaskCalendar({ isSidebarVisible }) {
           nextMonth={nextMonth}
         />
         <RenderDays />
+        <InputTaskInfo />
         <RenderCells
           currentMonth={currentMonth}
           selectedDate={selectedDate}
           onDateClick={onDateClick}
-          events={events}
-          onEventSubmit={handleScheduleRegistration}
+          events={tasks}
         />
       </div>
     </div>

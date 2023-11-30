@@ -8,9 +8,17 @@ import { GrClose } from 'react-icons/gr';
 
 export default function Sidebar() {
   const [toggle, setToggle] = useState(false);
+  const [checkedTasks, setCheckedTasks] = useState([]);
 
   const toggleSidebar = () => {
     setSidebarVisibility(!isSidebarVisible);
+  };
+
+  const handleTaskCheck = (taskId) => {
+    const updatedCheckedTasks = checkedTasks.includes(taskId)
+      ? checkedTasks.filter((id) => id !== taskId)
+      : [...checkedTasks, taskId];
+    setCheckedTasks(updatedCheckedTasks);
   };
 
   const onIconClick = useCallback(() => {
@@ -39,7 +47,10 @@ export default function Sidebar() {
 
       <SearchBar />
       </div>
-      <TaskCalendar isSidebarVisible={toggle} />
+      <TaskCalendar 
+        isSidebarVisible={toggle}
+        checkedTasks={checkedTasks}
+        onTaskCheck={handleTaskCheck} />
     </>
   );
 }

@@ -381,21 +381,16 @@ li {
 .saturday {
   color: blue;
 }
-/* .registerTask {
-  border: 1px solid #ccc;
-  margin: 5px;
-  padding: 5px;
-  z-index: 99;
-  background-color: red;
-  width: 12%;
+
+.eventTasks {
+  width: 200px;
+  height: 15px;
+  background-color: #CDECFA;
   border-radius: 20px;
   position: relative;
-} */
-
-.registerTask {
-  width: 100px;
-  height: 50px;
-  background-color: red;
+  top: 25px;
+  left: -15px;
+  font-size: 12px;
 }
 
 .TaskCalendarWrapper {
